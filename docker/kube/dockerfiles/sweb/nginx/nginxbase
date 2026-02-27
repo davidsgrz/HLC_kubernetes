@@ -1,4 +1,4 @@
-FROM dsegura97/ubbase
+FROM dsegura97/ubseguridad
 
 RUN apt update && apt install -yq --no-install-recommends \
     nginx

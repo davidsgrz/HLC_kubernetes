@@ -8,7 +8,7 @@ LOG_FILE="$LOG_DIR/informe_postgre.log"
 # =============================================
 PG_USER="postgres"
 PG_PASSWORD="usuario"
-PG_DATABASE="nestasir"
+PG_DATABASE="pokenest"
 PG_PORT="5432"
 
 # Detectar versión de PostgreSQL instalada
@@ -27,8 +27,8 @@ log() {
 load_entrypoint_seguridad() {
     log "Ejecutando entrypoint seguridad..."
 
-    if [ -f /root/admin/ubseguridad/jhlwstart.sh ]; then
-        bash /root/admin/ubseguridad/jhlwstart.sh || log "ADVERTENCIA: Entrypoint seguridad falló, continuando..."
+    if [ -f /root/admin/ubseguridad/start.sh ]; then
+        bash /root/admin/ubseguridad/start.sh || log "ADVERTENCIA: Entrypoint seguridad falló, continuando..."
         log "Entrypoint seguridad ejecutado"
     else
         log "ADVERTENCIA: No se encontró /root/admin/ubseguridad/jhlwstart.sh"

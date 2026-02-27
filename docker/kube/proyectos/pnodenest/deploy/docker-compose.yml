@@ -2,22 +2,12 @@ services:
   web:
     build:
       context: /home/david/kube/docker/kube
-      dockerfile: ./dockerfiles/nodejs/node
-    container_name: ctdavidbase
+      dockerfile: ./dockerfiles/nodejsnest/node
+    container_name: ctdavidnest
     ports:
       - "3000:80"
     env_file:
       - ./.env
-    image: dsegura97/nodejs
+    image: dsegura97/nestjs
     volumes:
       - ./logs:/root/logs
-    networks:
-      netnode:
-        ipv4_address: 172.130.13.4
-networks:
-  netnode:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.130.13.0/24

@@ -2,22 +2,22 @@ services:
   web:
     build:
       context: /home/david/kube/docker/kube
-      dockerfile: ./dockerfiles/nodejs/node
-    container_name: ctdavidbase
+      dockerfile: ./dockerfiles/postgre/postgre
+    container_name: ctdavidpostgre
     ports:
-      - "3000:80"
+      - "5432:5432"
     env_file:
       - ./.env
-    image: dsegura97/nodejs
+    image: dsegura97/postgre
     volumes:
       - ./logs:/root/logs
     networks:
-      netnode:
-        ipv4_address: 172.130.13.4
+      netpostgre:
+        ipv4_address: 172.130.17.4
 networks:
-  netnode:
+  netpostgre:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 172.130.13.0/24
+        - subnet: 172.130.17.0/24

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const pelicula_entidad_1 = require("./peliculas/entidades/pelicula.entidad");
 const pokemon_entidad_1 = require("./pokemon/entidades/pokemon.entidad");
@@ -19,11 +20,22 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'sqlite',
-                database: 'pokenest.db',
-                entities: [pelicula_entidad_1.Pelicula, pokemon_entidad_1.Pokemon],
-                synchronize: true,
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
+                useFactory: (configService) => ({
+                    type: 'postgres',
+                    host: configService.get('DB_HOST', 'localhost'),
+                    port: configService.get('DB_PORT', 5432),
+                    username: configService.get('DB_USERNAME', 'postgres'),
+                    password: configService.get('DB_PASSWORD', 'usuario'),
+                    database: configService.get('DB_NAME', 'pokenest'),
+                    entities: [pelicula_entidad_1.Pelicula, pokemon_entidad_1.Pokemon],
+                    synchronize: true,
+                }),
             }),
             peliculas_modulo_1.PeliculasModulo,
             pokemon_modulo_1.PokemonModulo,

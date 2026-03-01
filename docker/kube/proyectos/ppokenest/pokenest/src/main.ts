@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
-  await app.listen(3000);
-  console.log('Servidor corriendo en http://localhost:3000');
+  await app.listen(3001);
+  console.log('Servidor corriendo en http://localhost:3001');
 }
 bootstrap();

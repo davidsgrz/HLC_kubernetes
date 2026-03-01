@@ -5,4 +5,4 @@ echo "Comprobando configuración nginx..."
 nginx -t
 
 echo "Arrancando nginx en foreground..."
-nginx 
+service nginx stop 

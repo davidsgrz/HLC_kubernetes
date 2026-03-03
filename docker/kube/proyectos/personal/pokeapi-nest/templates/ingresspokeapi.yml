@@ -3,8 +3,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.app.container.name }}-ingress
   namespace: {{ .Release.Namespace }}
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  annotations: {}
 spec:
   rules:
   - host: {{ .Values.app.ingress.host }}

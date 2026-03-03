@@ -22,21 +22,46 @@ load_entrypoint_nginx(){
     fi
 }
 
-config_next(){
-    echo "Configurando dependencias en nodenext" >> /root/logs/nodenext/nodenext.log
-    cd /root/admin/nodenext/nextpokeapi
-    npm install
-    echo "Dependencias de Node instaladas" >> /root/logs/nodenext/nodenext.log
+workdir(){
+    echo "Cambiando directorio al proyecto NextJS..." >> /root/logs/informe_next.log
+    
+    if [ -d /root/admin/nodenext/proyectos/iawprojects ]; then
+        cd /root/admin/nodenext/proyectos/iawprojects
+        echo "Directorio cambiado a: $(pwd)" >> /root/logs/informe_next.log
+    else
+        echo "ERROR: Directorio /root/admin/nodenext/proyectos/iawprojects no existe" >> /root/logs/informe_next.log
+        exit 1
+    fi
+}
+
+dependencias-y-servicio(){
+    echo "Instalando dependencias NextJS..." >> /root/logs/informe_next.log
+    
+    # Verificar si package.json existe
+    if [ -f package.json ]; then
+        npm install -g npm@latest
+        npm install && echo "Dependencias instaladas" >> /root/logs/informe_next.log
+        
+        # Compilar el proyecto NextJS
+        echo "Compilando proyecto NextJS..." >> /root/logs/informe_next.log
+        npm run build && echo "Proyecto compilado exitosamente" >> /root/logs/informe_next.log
+        
+        # Iniciar el servidor NextJS en modo producción
+        echo "Arrancando NextJS en modo producción..." >> /root/logs/informe_next.log
+        HOST=0.0.0.0 PORT=3000 npm run start &
+    else
+        echo "ERROR: package.json no encontrado" >> /root/logs/informe_next.log
+        exit 1
+    fi
 }
 
 main(){
     mkdir -p /root/logs
     touch /root/logs/informe_next.log
     load_entrypoint_nginx
-    config_next
     load_entrypoint_seguridad
-
+    workdir
+    dependencias-y-servicio
 }
-
 
 main

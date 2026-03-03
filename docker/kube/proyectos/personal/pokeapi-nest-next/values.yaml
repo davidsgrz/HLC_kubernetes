@@ -20,6 +20,27 @@ app:
     host: nesthelm.davidsegurarodriguez.es
     port: 3001
 
+frontend:
+  name: webnext
+  image:
+    repository: dsegura97/nextpoke
+    tag: latest
+    pullPolicy: Always
+  container:
+    name: webnext
+    port: 3000
+    replicas: 3
+  service:
+    type: NodePort
+    port: 3000
+    nodePort: 30023
+    sshPort: 3457
+    sshTargetPort: 3457
+    sshNodePort: 30457
+  ingress:
+    host: nexthelm.davidsegurarodriguez.es
+    port: 3000
+
 postgres:
   name: postgre
   image:

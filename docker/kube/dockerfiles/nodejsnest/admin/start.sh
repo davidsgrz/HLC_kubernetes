@@ -7,7 +7,7 @@ load_entrypoint_seguridad() {
         bash /root/admin/ubseguridad/start.sh
         echo "Entrypoint seguridad ejecutado" >> /root/logs/informe_nest.log
     else
-        echo "ADVERTENCIA: No se encontró /root/admin/ubseguridad/jhlwstart.sh" >> /root/logs/informe_nest.log
+        echo "ADVERTENCIA: No se encontró /root/admin/ubseguridad/start.sh" >> /root/logs/informe_nest.log
     fi
 }
 

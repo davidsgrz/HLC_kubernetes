@@ -12,7 +12,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN mkdir -p /root/admin/nodenext
 RUN mkdir -p /root/admin/nodenext/proyectos/iawprojects
 WORKDIR /root/admin/nodenext
-COPY ./proyectos/ppokenext/pokenext /root/admin/nodenext/proyectos/iawprojects
+COPY ./proyectos/ppokenext/deploy/pokenext /root/admin/nodenext/proyectos/iawprojects
 
 COPY ./dockerfiles/nodejsnext/admin/start.sh .
 RUN chmod +x /root/admin/nodenext/start.sh

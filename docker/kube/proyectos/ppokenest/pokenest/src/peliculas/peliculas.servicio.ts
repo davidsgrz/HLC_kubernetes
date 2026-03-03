@@ -3,13 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Pelicula } from './entidades/pelicula.entidad';
 import { FiltrarPeliculaDto } from './dto/filtrar-pelicula.dto';
+import { CrearPeliculaDto } from './dto/crear-pelicula.dto';
 
 @Injectable()
 export class PeliculasServicio implements OnModuleInit {
   constructor(
     @InjectRepository(Pelicula)
     private peliculaRepo: Repository<Pelicula>,
-  ) {}
+  ) { }
 
   async onModuleInit() {
     const count = await this.peliculaRepo.count();
@@ -51,5 +52,10 @@ export class PeliculasServicio implements OnModuleInit {
     }
 
     return query.getMany();
+  }
+
+  create(dto: CrearPeliculaDto): Promise<Pelicula> {
+    const pelicula = this.peliculaRepo.create(dto);
+    return this.peliculaRepo.save(pelicula);
   }
 }

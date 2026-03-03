@@ -1,11 +1,12 @@
-﻿import { Controller, Get, Query } from '@nestjs/common';
+﻿import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { PeliculasServicio } from './peliculas.servicio';
 import { FiltrarPeliculaDto } from './dto/filtrar-pelicula.dto';
+import { CrearPeliculaDto } from './dto/crear-pelicula.dto';
 import { Pelicula } from './entidades/pelicula.entidad';
 
 @Controller('peliculas')
 export class PeliculasControlador {
-  constructor(private readonly peliculasServicio: PeliculasServicio) {}
+  constructor(private readonly peliculasServicio: PeliculasServicio) { }
 
   // GET /peliculas  -> todas las películas
   @Get()
@@ -17,5 +18,11 @@ export class PeliculasControlador {
   @Get('filtrar')
   filtrar(@Query() dto: FiltrarPeliculaDto): Promise<Pelicula[]> {
     return this.peliculasServicio.filtrar(dto);
+  }
+
+  // POST /peliculas  -> crear una nueva película
+  @Post()
+  create(@Body() dto: CrearPeliculaDto): Promise<Pelicula> {
+    return this.peliculasServicio.create(dto);
   }
 }

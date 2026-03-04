@@ -12,7 +12,7 @@ import { PokemonModulo } from './pokemon/pokemon.modulo';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
-      exclude: ['/api/(.*)'],
+      exclude: ['/api/{*path}'],
     }),
     ConfigModule.forRoot({
       isGlobal: true,

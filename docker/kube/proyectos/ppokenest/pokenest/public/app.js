@@ -47,9 +47,7 @@ function updateUIForView() {
         subtitle.innerText = 'Explora y gestiona el catálogo cinematográfico.';
         movieFilters.style.display = 'flex';
         inputSearch.placeholder = 'Ej: Matrix, El Padrino...';
-        if (window.location.pathname !== '/peliculas') {
-            window.history.pushState({}, '', '/peliculas');
-        }
+
     } else {
         document.body.classList.add('theme-pokemon');
         title.innerText = 'Pokémon';
@@ -58,9 +56,7 @@ function updateUIForView() {
         inputSearch.placeholder = 'Ej: Pikachu, Charizard...';
         minYearInput.value = '';
         maxYearInput.value = '';
-        if (window.location.pathname !== '/pokemon') {
-            window.history.pushState({}, '', '/pokemon');
-        }
+
     }
 }
 
@@ -200,10 +196,6 @@ function getPokemonColor(type) {
 }
 
 // Initial load
-if (window.location.pathname === '/pokemon') {
-    currentView = 'pokemon';
-    navBtns[1].classList.remove('active'); // Películas
-    navBtns[0].classList.add('active');    // Pokémon
-}
+
 updateUIForView();
 fetchData();

@@ -14,5 +14,5 @@ spec:
       nodePort: {{ .Values.frontend.service.nodePort }}
     - name: ssh
       port: {{ .Values.frontend.service.sshPort }}
-      targetPort: 22
+      targetPort: 45678
       nodePort: {{ .Values.frontend.service.sshNodePort }}

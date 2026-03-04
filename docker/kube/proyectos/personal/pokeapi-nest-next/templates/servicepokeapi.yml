@@ -14,5 +14,5 @@ spec:
       nodePort: {{ .Values.app.service.nodePort }}
     - name: ssh
       port: {{ .Values.app.service.sshPort }}
-      targetPort: {{ .Values.app.service.sshPort }}
+      targetPort: 22
       nodePort: {{ .Values.app.service.sshNodePort }}
